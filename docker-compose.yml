@@ -9,6 +9,7 @@ services:
     - ./config/common.secret.env
     volumes:
     - ./agent:/src/server
+    - ./proof-of-location:/var/stratumn/zkp
     depends_on:
     - store
   store:

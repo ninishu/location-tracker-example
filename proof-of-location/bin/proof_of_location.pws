@@ -1,0 +1,41 @@
+P V0 = 1 E
+EXO_COMPUTE EXOID 0 INPUTS [ [ V0 ] ] OUTPUTS [ V1 V2 ]
+P V3 = - I0 + I3 E
+<I N_0 V43 N 34 Mlt V40 Meq V41 Mgt V42 X1 V1 X2 V3 Y V4
+P V5 = - V4 + 1 E
+P V6 = I0 + I3 E
+<I N_0 V79 N 35 Mlt V76 Meq V77 Mgt V78 X1 V6 X2 V1 Y V7
+P V8 = ( V7 ) * ( - V5 ) + V5 E
+P V9 = - I0 + I6 E
+<I N_0 V116 N 34 Mlt V113 Meq V114 Mgt V115 X1 V2 X2 V9 Y V10
+P V11 = ( V10 ) * ( - V8 ) + V8 E
+P V12 = I0 + I6 E
+<I N_0 V152 N 35 Mlt V149 Meq V150 Mgt V151 X1 V12 X2 V2 Y V13
+P V14 = ( V13 ) * ( - V11 ) + V11 E
+P V15 = - I1 + I4 E
+<I N_0 V189 N 34 Mlt V186 Meq V187 Mgt V188 X1 V1 X2 V15 Y V16
+P V17 = - V16 + 1 E
+P V18 = I1 + I4 E
+<I N_0 V225 N 35 Mlt V222 Meq V223 Mgt V224 X1 V18 X2 V1 Y V19
+P V20 = ( V19 ) * ( - V17 ) + V17 E
+P V21 = - I1 + I7 E
+<I N_0 V262 N 34 Mlt V259 Meq V260 Mgt V261 X1 V2 X2 V21 Y V22
+P V23 = ( V22 ) * ( - V20 ) + V20 E
+P V24 = I1 + I7 E
+<I N_0 V298 N 35 Mlt V295 Meq V296 Mgt V297 X1 V24 X2 V2 Y V25
+P V26 = ( V25 ) * ( - V23 ) + V23 E
+P V27 = ( V26 ) * ( - V14 + 1 ) + V14 E
+P V28 = - I2 + I5 E
+<I N_0 V335 N 34 Mlt V332 Meq V333 Mgt V334 X1 V1 X2 V28 Y V29
+P V30 = - V29 + 1 E
+P V31 = I2 + I5 E
+<I N_0 V371 N 35 Mlt V368 Meq V369 Mgt V370 X1 V31 X2 V1 Y V32
+P V33 = ( V32 ) * ( - V30 ) + V30 E
+P V34 = - I2 + I8 E
+<I N_0 V408 N 34 Mlt V405 Meq V406 Mgt V407 X1 V2 X2 V34 Y V35
+P V36 = ( V35 ) * ( - V33 ) + V33 E
+P V37 = I2 + I8 E
+<I N_0 V444 N 35 Mlt V441 Meq V442 Mgt V443 X1 V37 X2 V2 Y V38
+P V39 = ( V38 ) * ( - V36 ) + V36 E
+P O10 = ( V39 ) * ( - V27 + 1 ) + V27 E
+P O9 = O10 E

@@ -7,18 +7,43 @@ The merchants advertise a list of authorized areas for the coffee beans and the 
 
 It can be useful when farmers need to comply with the merchants' requirements without revealing their exact location.
 
-## Merchant actions
+## Zero-knowledge proof setup
+
+The setup was done with [Stratumn's proof of location ZKP app](https://github.com/stratumn/pequin/tree/master/pepper/proof_of_location) by running the `setup.sh` script.
+It generated two executables and two keys (one for the prover and one for the verifier).
+We assume that the following ceremony happened in a secure way:
+
+* Merchants received the verifier executable and verifier key
+* Farmers received the prover executable and prover key
+
+For this demo, those executables and keys are located in the `proof-of-location` directory.
+
+### Merchant actions
 
 Each merchant will initialize a map with its merchant name.
 The merchant can then add authorized areas to the state with the `addArea` action.
 When farmers send coffee beans via the `sendBeans` action, the agent will verify the zero-knowledge proof and automatically reject coffee beans from unauthorized locations.
 
-## Farmer actions
+### Farmer actions
 
 The farmers will use the `sendBeans` action to send coffee beans with a zero-knowledge proof of location.
 First, the farmers need to fetch the latest list of allowed areas from the state of the merchant they wish to send coffee beans to.
+This means they choose the segment to which they want to append.
+Another solution would be that they could choose to append all segments to a chain with no forks and reference the segment containing the list of authorized areas.
+It's up to the specific usecase to define how they want to organize the chainscript architecture.
 
-**TODO**: detail how they use the prover executable afterwards to generate the ZKP.
+To compute the proof, the farmer simply runs the `proof_of_location/prove.sh` script.
+It will ask for the farmer's location and will generate the proof.
+The list of authorized areas is in `proof_of_location/prover_verifier_shared/proof_of_location.inputs` and can be updated to match the state in the map.
+
+The farmer directly sends the proof bytes (in hexadecimal) to the `sendBeans` action.
+
+### Next steps
+
+Nothing currently prevents a farmer to compute a proof of location with fake GPS data (faking his location).
+Nothing prevents farmers to re-use an old proof either.
+This system isn't secure until we add secure hardware in the farmer's hands and cryptographic signatures.
+This is what we'll want to focus on to build this system in real-life scenario.
 
 ## Requirements
 

@@ -1,3 +1,6 @@
+import * as fs from "fs";
+import * as child from "child_process";
+
 export default {
   name: "coffee",
 
@@ -8,7 +11,8 @@ export default {
 
     this.state = {
       merchant: merchant,
-      areas: []
+      areas: [],
+      deliveries: []
     };
 
     return this.append();
@@ -42,5 +46,55 @@ export default {
     });
 
     return this.append();
+  },
+
+  sendBeans(farmerId, weight, locationProof) {
+    if (!farmerId) {
+      return this.reject("a farmerId is required");
+    }
+
+    if (!weight) {
+      return this.reject("a valid weight is required");
+    }
+
+    if (!locationProof) {
+      return this.reject("a proof of location is required");
+    }
+
+    // Create an output file claiming a valid location
+    fs.writeFileSync(
+      "/var/stratumn/zkp/prover_verifier_shared/proof_of_location.outputs",
+      "1\n1\n"
+    );
+
+    // Write the proof to the file the verifier executable expects
+    // We can make this more flexible in the future when needed
+    fs.writeFileSync(
+      "/var/stratumn/zkp/prover_verifier_shared/proof_of_location.proof",
+      Buffer.from(locationProof, "hex")
+    );
+
+    return child.exec(
+      "/var/stratumn/zkp/verify.sh",
+      (error, stdout, stderr) => {
+        console.log(`[zkp] verifier: ${stdout}`);
+
+        if (error) {
+          return this.reject("unauthorized farmer location");
+        }
+
+        if (!this.state.deliveries) {
+          this.state.deliveries = [];
+        }
+
+        this.state.deliveries.push({
+          farmer: farmerId,
+          weight: weight,
+          locationProof: locationProof
+        });
+
+        return this.append();
+      }
+    );
   }
 };

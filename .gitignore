@@ -59,3 +59,9 @@ typings/
 
 # Segments
 segments
+
+# ZKP
+proof-of-location/prover_verifier_shared/block_stores
+proof-of-location/prover_verifier_shared/*.outputs
+proof-of-location/prover_verifier_shared/*.proof
+proof-of-location/bin/exo0

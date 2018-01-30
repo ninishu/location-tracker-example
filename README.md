@@ -7,10 +7,23 @@ The merchants advertise a list of authorized areas for the coffee beans and the 
 
 It can be useful when farmers need to comply with the merchants' requirements without revealing their exact location.
 
+## Merchant actions
+
+Each merchant will initialize a map with its merchant name.
+The merchant can then add authorized areas to the state with the `addArea` action.
+When farmers send coffee beans via the `sendBeans` action, the agent will verify the zero-knowledge proof and automatically reject coffee beans from unauthorized locations.
+
+## Farmer actions
+
+The farmers will use the `sendBeans` action to send coffee beans with a zero-knowledge proof of location.
+First, the farmers need to fetch the latest list of allowed areas from the state of the merchant they wish to send coffee beans to.
+
+**TODO**: detail how they use the prover executable afterwards to generate the ZKP.
+
 ## Requirements
 
-- [Docker >= 1.10](https://www.docker.com/products/docker)
-- [Docker Compose >= 1.6](https://docs.docker.com/compose/install)
+* [Docker >= 1.10](https://www.docker.com/products/docker)
+* [Docker Compose >= 1.6](https://docs.docker.com/compose/install)
 
 Docker Compose is already included in some distributions of Docker.
 
@@ -110,7 +123,7 @@ during testing.
 
 ### Validation
 
-There is a json file in `./validation` named `rules.json`. 
+There is a json file in `./validation` named `rules.json`.
 It contains json schema validation rules that are executed for each action your processes handle.
 
 ## License

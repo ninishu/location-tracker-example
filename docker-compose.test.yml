@@ -1,0 +1,17 @@
+version: '2'
+services:
+  agent:
+    build:
+      dockerfile: Dockerfile.test
+    env_file:
+    - ./config/test.env
+    - ./config/test.secret.env
+  store:
+    env_file:
+    - ./config/test.env
+    - ./config/test.secret.env
+networks:
+  default:
+    driver: bridge
+    driver_opts:
+        name: location-tracker_test

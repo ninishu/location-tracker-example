@@ -1,0 +1,19 @@
+{
+    
+    "coffee": [
+        {
+            "type": "init",
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "merchant": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "merchant"
+                ]
+            }
+        }
+    ]
+}

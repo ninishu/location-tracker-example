@@ -1,0 +1,1 @@
+FROM indigoframework/agent-js:dev-alpine-0.2.0

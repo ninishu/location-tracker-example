@@ -1,0 +1,24 @@
+{
+  "name": "location-tracker",
+  "version": "0.2.0",
+  "description": "A sample agent showcasing a zero-knowledge proof of location",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --exec babel-node --presets env -L -i test -i segments -i node_modules index.js",
+    "test": "mocha --compilers js:babel-core/register --recursive --require should"
+  },
+  "author": "t-bast",
+  "license": "SEE LICENSE IN LICENSE",
+  "dependencies": {
+    "@indigoframework/agent": "^0.2.0",
+    "express": "^4.14.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "mocha": "^2.5.3",
+    "nodemon": "^1.9.2",
+    "should": "^10.0.0"
+  }
+}

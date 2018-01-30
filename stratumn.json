@@ -1,0 +1,18 @@
+{
+  "name": "location-tracker",
+  "author": "t-bast",
+  "description": "A sample agent showcasing a zero-knowledge proof of location",
+  "license": "SEE LICENSE IN LICENSE",
+  "scripts": {
+    "compose": "docker-compose -p location-tracker-dev -f docker-compose.yml -f docker-compose.dev.yml",
+    "compose:test": "docker-compose -p location-tracker-test -f docker-compose.yml -f docker-compose.test.yml",
+    "build": "strat run compose build",
+    "build:test": "strat run compose:test build",
+    "up": "strat run build && strat run compose up",
+    "down": "strat run compose down",
+    "down:test": "strat run compose:test down",
+    "test": "strat run build:test && strat run compose:test run agent npm test",
+    "pull": "strat run compose pull",
+    "push": "strat run compose push"
+  }
+}

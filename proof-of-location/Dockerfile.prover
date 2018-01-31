@@ -1,0 +1,21 @@
+# This image needs to be built from the root directory:
+# docker build -f proof-of-location/Dockerfile.prover -t stratumn/location-tracker-prover:latest .
+# It will package the prover files.
+FROM alpine
+
+RUN mkdir /proof-of-location
+
+WORKDIR /proof-of-location
+COPY proof-of-location/prove.sh .
+
+RUN mkdir bin
+COPY proof-of-location/bin/proof_of_location.* bin/
+COPY proof-of-location/bin/pepper_prover_proof_of_location bin/
+
+RUN mkdir proving_material
+COPY proof-of-location/proving_material/* proving_material/
+
+RUN mkdir prover_verifier_shared
+COPY proof-of-location/prover_verifier_shared/proof_of_location.inputs prover_verifier_shared/
+
+ENTRYPOINT ["./prove.sh"]

@@ -1,0 +1,39 @@
+# This image needs to be built from the root directory:
+# docker build -f proof-of-location/Dockerfile.verifier -t stratumn/location-tracker-agent:latest .
+# It will package the agent with the ZKP verifier files.
+FROM node:8.9.1-alpine
+
+RUN apk add --no-cache git make gcc g++ python
+
+RUN mkdir /var/stratumn
+RUN mkdir /var/stratumn/zkp
+COPY proof-of-location/verify.sh /var/stratumn/zkp/
+
+WORKDIR /var/stratumn/zkp/
+
+RUN mkdir bin
+COPY proof-of-location/bin/pepper_verifier_proof_of_location bin/
+COPY proof-of-location/bin/proof_of_location.* bin/
+
+RUN mkdir verification_material
+COPY proof-of-location/verification_material/* verification_material/
+
+RUN mkdir prover_verifier_shared
+COPY proof-of-location/prover_verifier_shared/proof_of_location.inputs prover_verifier_shared/
+
+RUN mkdir /agent
+
+ADD agent/package.json /agent/package.json
+ADD agent/yarn.lock /agent/yarn.lock
+
+WORKDIR /agent
+RUN yarn install
+ADD agent/index.js .
+ADD agent/.babelrc .
+
+RUN mkdir /agent/lib
+RUN mkdir /agent/lib/actions
+ADD agent/lib/actions/actions-coffee.js lib/actions/
+
+ENV NODE_ENV production
+CMD ["yarn", "start"]

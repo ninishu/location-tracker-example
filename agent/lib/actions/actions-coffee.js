@@ -87,6 +87,13 @@ export default {
         console.log(`[zkp] verifier: ${stdout}`);
 
         if (error) {
+          console.log("Inputs:");
+          console.log(
+            fs.readFileSync(
+              "/var/stratumn/zkp/prover_verifier_shared/proof_of_location.inputs",
+              "ascii"
+            )
+          );
           return this.reject("unauthorized farmer location");
         }
 

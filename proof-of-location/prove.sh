@@ -15,10 +15,16 @@ echo "echo $X" >> bin/exo0
 echo "echo $Y" >> bin/exo0
 chmod +x bin/exo0
 
+echo "* User coordinates:"
+cat bin/exo0
+
+echo "* Computation inputs:"
+cat prover_verifier_shared/proof_of_location.inputs
+
 bin/pepper_prover_proof_of_location prove proof_of_location.pkey proof_of_location.inputs proof_of_location.outputs proof_of_location.proof
 
 # Output the content of the outputs file.
-echo "* Computation output:"
+echo "* Computation outputs:"
 cat prover_verifier_shared/proof_of_location.outputs
 
 # Output the proof bytes.

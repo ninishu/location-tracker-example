@@ -20,6 +20,7 @@ cat bin/exo0
 
 echo "* Computation inputs:"
 cat prover_verifier_shared/proof_of_location.inputs
+echo ""
 
 bin/pepper_prover_proof_of_location prove proof_of_location.pkey proof_of_location.inputs proof_of_location.outputs proof_of_location.proof
 

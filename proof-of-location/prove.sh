@@ -24,3 +24,4 @@ cat prover_verifier_shared/proof_of_location.outputs
 # Output the proof bytes.
 echo "* Proof hex bytes:"
 hexdump -e '16/1 "%02x " "\n"' prover_verifier_shared/proof_of_location.proof | tr -d " \r\n"
+echo ""

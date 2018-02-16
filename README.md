@@ -33,6 +33,7 @@ Another solution would be that they could choose to append all segments to a cha
 It's up to the specific usecase to define how they want to organize the chainscript architecture.
 
 To compute the proof, the farmer simply runs the `proof_of_location/prove.sh` script.
+Alternatively, the farmer can use the provided docker image: `docker run -it stratumn/location-tracker-prover:latest`.
 It will ask for the farmer's location and will generate the proof.
 The list of authorized areas is in `proof_of_location/prover_verifier_shared/proof_of_location.inputs` and can be updated to match the state in the map.
 

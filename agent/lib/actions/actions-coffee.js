@@ -18,24 +18,16 @@ export default {
     return this.append();
   },
 
-  addArea(area) {
-    if (!area) {
-      return this.reject("an area is required");
-    }
-
-    const parsedArea = JSON.parse(area);
-    const radius = parsedArea.radius;
-    if (!radius || typeof radius !== "number" || !isFinite(radius)) {
+  addArea(radius, x, y) {
+    if (!radius || parseInt(radius) === NaN) {
       return this.reject("a valid radius is required");
     }
 
-    const x = parsedArea.x;
-    if (!x || typeof x !== "number" || !isFinite(x)) {
+    if (!x || parseInt(x) === NaN) {
       return this.reject("a valid X is required");
     }
 
-    const y = parsedArea.y;
-    if (!y || typeof y !== "number" || !isFinite(y)) {
+    if (!y || parseInt(y) === NaN) {
       return this.reject("a valid Y is required");
     }
 
@@ -44,6 +36,21 @@ export default {
       x: x,
       y: y
     });
+
+    // Update the inputs file accordingly
+    const areaCount = this.state.areas.length;
+    let contents = new Array(3 * areaCount);
+    for (var i = 0; i < areaCount; i++) {
+      const area = this.state.areas[i];
+      contents[i] = area.radius;
+      contents[areaCount + i] = area.x;
+      contents[2 * areaCount + i] = area.y;
+    }
+
+    fs.writeFileSync(
+      "/var/stratumn/zkp/prover_verifier_shared/proof_of_location.inputs",
+      contents.join("\n")
+    );
 
     return this.append();
   },

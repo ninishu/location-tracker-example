@@ -24,6 +24,8 @@ Each merchant will initialize a map with its merchant name.
 The merchant can then add authorized areas to the state with the `addArea` action.
 When farmers send coffee beans via the `sendBeans` action, the agent will verify the zero-knowledge proof and automatically reject coffee beans from unauthorized locations.
 
+**Note**: for the purpose of this demo, we restricted the ZKP circuit to a number of three authorized areas. That means each map should ideally use the `addArea` action three times otherwise you might see some issues with the proofs. This is of course something we'll change in the future as we productize the system.
+
 ### Farmer actions
 
 The farmers will use the `sendBeans` action to send coffee beans with a zero-knowledge proof of location.
@@ -41,7 +43,7 @@ The farmer directly sends the proof bytes (in hexadecimal) to the `sendBeans` ac
 
 ### Next steps
 
-Nothing currently prevents a farmer to compute a proof of location with fake GPS data (faking his location).
+Nothing currently prevents a farmer from computing a proof of location with fake GPS data (faking his location).
 Nothing prevents farmers to re-use an old proof either.
 This system isn't secure until we add secure hardware in the farmer's hands and cryptographic signatures.
 This is what we'll want to focus on to build this system in real-life scenario.
